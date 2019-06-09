@@ -1,0 +1,1 @@
+insert into ingreso (id, cilindraje, placa, tipo_vehiculo) values (1, 'dddd', 'eeeee', 'd');
