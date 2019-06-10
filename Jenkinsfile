@@ -26,7 +26,7 @@ pipeline {
 		stage('Unit Tests') {      
 			steps{        
 				echo "------------>Unit Tests<------------"
-				sh 'gradle --stacktrace test'  
+				sh 'gradle --b ./build.gradle test'  
 			}    
 		}    
 		stage('Integration Tests') {      
@@ -34,6 +34,12 @@ pipeline {
 				echo "------------>Integration Tests<------------"      
 			}    
 		}    
+		stage('Build') {
+		    steps {
+		        echo '------------>Build<------------'
+		        sh 'gradle --b ./build.gradle build -x test'
+		    }
+		}
 		stage('Static Code Analysis') {      
 			steps{        
 				echo '------------>Análisis de código estático<------------'        
@@ -41,12 +47,6 @@ pipeline {
 					sh "${tool name: 'SonarScanner',type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner-Dproject.settings=sonar-project.properties"
 				}
 			}
-		}
-		stage('Build') {
-		    steps {
-		        echo '------------>Build<------------'
-		        sh 'gradle build -x test'
-		    }
 		}
 	}
 	
