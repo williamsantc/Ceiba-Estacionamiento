@@ -1,4 +1,4 @@
-package co.com.ceiba.adn.parking.service.application.command.serve;
+package co.com.ceiba.adn.parking.service.domain.command.serve;
 
 import java.util.Calendar;
 

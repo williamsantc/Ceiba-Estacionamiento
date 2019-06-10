@@ -13,13 +13,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommandIngreso {
 
-private Long id;
-	
+	private Long id;
+
 	private String placa;
-	
+
 	private String tipoVehiculo;
-	
+
 	private String cilindraje;
-	
+
 	private Calendar registroEntrada;
 }

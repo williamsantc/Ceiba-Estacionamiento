@@ -7,7 +7,7 @@ import co.com.ceiba.adn.parking.common.application.CommandResponse;
 import co.com.ceiba.adn.parking.common.application.handle.CommandHandleResponse;
 import co.com.ceiba.adn.parking.service.application.command.CommandIngreso;
 import co.com.ceiba.adn.parking.service.application.command.factory.FactoryIngreso;
-import co.com.ceiba.adn.parking.service.application.command.serve.CommandServiceCreateIngreso;
+import co.com.ceiba.adn.parking.service.domain.command.serve.CommandServiceCreateIngreso;
 import co.com.ceiba.adn.parking.service.domain.model.Ingreso;
 
 @Component
