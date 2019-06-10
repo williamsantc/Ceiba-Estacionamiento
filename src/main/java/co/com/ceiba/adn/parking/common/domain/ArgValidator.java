@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import co.com.ceiba.adn.parking.common.domain.exception.*;
 
-public class ArgValidator {
+public final class ArgValidator {
 
 	private ArgValidator() {
 
