@@ -26,8 +26,14 @@ public class ArgValidator {
 			throw new ExceptionLengthValue(message);
 		}
 	}
+	
+	public static void validateRequired(String value, String message) {
+		if(value == null || value.isEmpty()) {
+			throw new ExceptionRequiredValue(message);
+		}
+	}
 
-	public static <T> void validateNotEmpty(List<T> list, String message) {
+	public static <T> void validateListNotEmpty(List<T> list, String message) {
 		if (list.isEmpty()) {
 			throw new ExceptionRequiredValue(message);
 		}
