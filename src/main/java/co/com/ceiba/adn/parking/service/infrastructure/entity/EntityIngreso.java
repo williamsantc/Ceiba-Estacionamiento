@@ -1,5 +1,6 @@
 package co.com.ceiba.adn.parking.service.infrastructure.entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -19,12 +20,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Ingreso")
-public class EntityIngreso {
+@Table(name = "Ingreso")
+public class EntityIngreso implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	@Column
     private Long id;
 	
 	@Column

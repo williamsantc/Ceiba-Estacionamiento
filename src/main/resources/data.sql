@@ -1,1 +1,1 @@
-insert into ingreso (id, cilindraje, placa, tipo_vehiculo) values (1, 'dddd', 'eeeee', 'd');
+insert into ingreso (id, placa, tipo_vehiculo, registro_entrada) values (1, 'ASD456', 'CARRO', now());

@@ -8,5 +8,5 @@ public interface QueryPortIngreso {
 	
 	List<Ingreso> findAll();
 	
-	List<Ingreso> findByTipoVehiculo(String tipoVehiculo);
+	int countByTipoVehiculo(String tipoVehiculo);
 }

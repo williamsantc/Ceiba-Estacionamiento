@@ -12,24 +12,26 @@ import co.com.ceiba.adn.parking.service.infrastructure.entity.EntityIngreso;
 @Component
 public class MapperIngresoImlp implements MapperIngreso {
 	
+	FactoryMapper mapper = FactoryMapper.getInstance();
+	
 	@Override
 	public EntityIngreso mapToEntity(Ingreso ingreso) {
-		return FactoryMapper.getInstance().map(ingreso, EntityIngreso.class);
+		return mapper.map(ingreso, EntityIngreso.class);
 	}
 
 	@Override
 	public List<Ingreso> mapFromEntityList(List<EntityIngreso> listIngreso) {
 		
 		List<Ingreso> lista = new ArrayList<>();
-		listIngreso.forEach(entityIngreso -> {
-			lista.add(FactoryMapper.getInstance().map(entityIngreso, Ingreso.class));
-		});
+		listIngreso.forEach(entityIngreso -> 
+			lista.add(mapper.map(entityIngreso, Ingreso.class))
+		);
 		return lista;
 	}
 	
 	@Override
 	public Ingreso mapFromEntity(EntityIngreso entityIngreso) {
-		return FactoryMapper.getInstance().map(entityIngreso, Ingreso.class);
+		return mapper.map(entityIngreso, Ingreso.class);
 	}
 
 }

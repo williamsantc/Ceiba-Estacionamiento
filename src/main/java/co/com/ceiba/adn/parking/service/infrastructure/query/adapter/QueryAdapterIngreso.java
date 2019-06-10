@@ -21,12 +21,12 @@ public class QueryAdapterIngreso implements QueryPortIngreso {
 
 	@Override
 	public List<Ingreso> findAll() {
-		return mapperIngresoImlp.mapFromEntityList(repositoryIngreso.findAll());
+		return this.mapperIngresoImlp.mapFromEntityList(repositoryIngreso.findAll());
 	}
 
 	@Override
-	public List<Ingreso> findByTipoVehiculo(String tipoVehiculo) {
-		return mapperIngresoImlp.mapFromEntityList(repositoryIngreso.findByTipoVehiculo(tipoVehiculo));
+	public int countByTipoVehiculo(String tipoVehiculo) {
+		return this.repositoryIngreso.countByTipoVehiculo(tipoVehiculo);
 	}
 
 }

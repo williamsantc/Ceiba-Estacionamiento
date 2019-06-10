@@ -6,7 +6,7 @@ public class FactoryMapper extends ModelMapper {
 	
 	private static final FactoryMapper INSTANCE = new FactoryMapper();
 	
-	public static ModelMapper getInstance() {
+	public static FactoryMapper getInstance() {
 		return INSTANCE;
 	}
 }
