@@ -20,10 +20,7 @@ pipeline{
 		}
 		
 		environment {
-        PROJECT_PATH_BACK = 'Parking'
-		}
-		parameters{
-			booleanParam defaultValue: false, description: 'Push a registry AWS', name: 'pushdeploy'
+        PROJECT_PATH_BACK = './'
 		}
 		
 		stages{
