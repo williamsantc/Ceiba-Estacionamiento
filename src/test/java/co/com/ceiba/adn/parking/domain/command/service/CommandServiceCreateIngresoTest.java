@@ -40,58 +40,59 @@ public class CommandServiceCreateIngresoTest {
 		TestBase.assertThrows(() -> commandServiceCreateIngreso.exec(ingreso), ExeptionIngresoNoPermitido.class,
 				messagePlacaNoPermitida);
 	}
-	
+
 	@Test
 	public void validateInsertIngresoWithCupoActualSuperadoCarro() {
-		
-		//Arrange
+
+		// Arrange
 		String messageLimiteVehiculosAlcanzado = "Ingreso no permitido, no hay mas cupo en el parqueadero.";
 		String fieldTipoVehiculoValueCarro = "CARRO";
 		int limitCountCarros = 20;
-		
+
 		IngresoTestDataBuilder ingresoTestDataBuilder = new IngresoTestDataBuilder();
 		ingresoTestDataBuilder.withPlaca("DFR345").withTipoVehiculo(fieldTipoVehiculoValueCarro);
 		Ingreso ingreso = ingresoTestDataBuilder.build();
-		
+
 		QueryPortIngreso queryPortIngreso = Mockito.mock(QueryPortIngreso.class);
 		Mockito.when(queryPortIngreso.countByTipoVehiculo(Mockito.anyString())).thenReturn(limitCountCarros);
-		
+
 		CommandPortIngreso commandPortIngreso = Mockito.mock(CommandPortIngreso.class);
 		Mockito.when(commandPortIngreso.insertIngreso(ingreso)).thenReturn(ingreso);
-		
+
 		CommandServiceCreateIngreso commandServiceCreateIngreso = new CommandServiceCreateIngreso(queryPortIngreso,
 				commandPortIngreso);
-		
-		//Act - Assert
+
+		// Act - Assert
 		TestBase.assertThrows(() -> commandServiceCreateIngreso.exec(ingreso), ExeptionIngresoNoPermitido.class,
 				messageLimiteVehiculosAlcanzado);
-		
+
 	}
-	
+
 	@Test
-	public void validateInsertIngresoWithCupoActualSuperadMoto() {
-		
-		//Arrange
+	public void validateInsertIngresoWithCupoActualSuperadoMoto() {
+
+		// Arrange
 		String messageLimiteVehiculosAlcanzado = "Ingreso no permitido, no hay mas cupo en el parqueadero.";
 		String fieldTipoVehiculoValueCarro = "MOTO";
 		int limitCountMotos = 10;
-		
+
 		IngresoTestDataBuilder ingresoTestDataBuilder = new IngresoTestDataBuilder();
 		ingresoTestDataBuilder.withPlaca("DFR345").withTipoVehiculo(fieldTipoVehiculoValueCarro).withCilindraje("100");
 		Ingreso ingreso = ingresoTestDataBuilder.build();
-		
+
 		QueryPortIngreso queryPortIngreso = Mockito.mock(QueryPortIngreso.class);
 		Mockito.when(queryPortIngreso.countByTipoVehiculo(Mockito.anyString())).thenReturn(limitCountMotos);
-		
+
 		CommandPortIngreso commandPortIngreso = Mockito.mock(CommandPortIngreso.class);
 		Mockito.when(commandPortIngreso.insertIngreso(ingreso)).thenReturn(ingreso);
-		
+
 		CommandServiceCreateIngreso commandServiceCreateIngreso = new CommandServiceCreateIngreso(queryPortIngreso,
 				commandPortIngreso);
-		
-		//Act - Assert
+
+		// Act - Assert
 		TestBase.assertThrows(() -> commandServiceCreateIngreso.exec(ingreso), ExeptionIngresoNoPermitido.class,
 				messageLimiteVehiculosAlcanzado);
-		
+
 	}
+	
 }
