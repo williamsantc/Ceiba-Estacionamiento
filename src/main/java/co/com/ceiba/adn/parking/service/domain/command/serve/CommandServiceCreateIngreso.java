@@ -26,9 +26,15 @@ public class CommandServiceCreateIngreso {
 
 	@Autowired
 	private QueryPortIngreso queryPortIngreso;
+	
+	// For testing purposes
+	public CommandServiceCreateIngreso (QueryPortIngreso queryPortIngreso, CommandPortIngreso commandPortIngreso) {
+		this.queryPortIngreso = queryPortIngreso;
+		this.commandPortIngreso = commandPortIngreso;
+	}
 
 	public Long exec(Ingreso ingreso) {
-		this.validateDisponibilidadIngresoByPlaca(ingreso.getPlaca());
+		this.validateDisponibilidadIngresoByPlaca(ingreso.getPlaca(), ingreso.getRegistroEntrada());
 		this.validateDisponibilidadIngresoByTipoVehiculo(ingreso.getTipoVehiculo());
 		return this.commandPortIngreso.insertIngreso(ingreso).getId();
 	}
@@ -41,10 +47,9 @@ public class CommandServiceCreateIngreso {
 		}
 	}
 
-	private void validateDisponibilidadIngresoByPlaca(String placa) {
-		Calendar now = Calendar.getInstance();
-		int currentDay = now.get(Calendar.DAY_OF_WEEK);
-		if (placa.startsWith(PLACA_START_WITH) && currentDay > Calendar.MONDAY) {
+	private void validateDisponibilidadIngresoByPlaca(String placa, Calendar date) {
+		int day = date.get(Calendar.DAY_OF_WEEK);
+		if (placa.startsWith(PLACA_START_WITH) && day > Calendar.MONDAY) {
 			throw new ExeptionIngresoNoPermitido(MESSAGE_PLACA_NO_PERMETIDA);
 		}
 	}
