@@ -1,4 +1,4 @@
-package co.com.ceiba.adn.parking.domain.mapper;
+package co.com.ceiba.adn.parking.infrastructure.mapper;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
 import co.com.ceiba.adn.parking.infrastructure.command.testdatabuilder.EntityEntryTestDataBuilder;
-import co.com.ceiba.adn.parking.service.domain.mapper.MapperEntryImlp;
 import co.com.ceiba.adn.parking.service.domain.model.Entry;
+import co.com.ceiba.adn.parking.service.infrastrcuture.mapper.MapperEntryImlp;
 import co.com.ceiba.adn.parking.service.infrastructure.entity.EntityEntry;
 
 public class MapperEntryTest {
