@@ -41,9 +41,9 @@ public class CommandServiceCreateEntry {
 
 	private void validateDisponibilidadEntryByVehicleType(String vehicleType) {
 		int countVehicleType = this.queryPortEntry.countByVehicleType(vehicleType);
-		if (vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_CAR) && countVehicleType >= LIMIT_CAR_COUNT
-				|| vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_MOTORCLYCLE)
-						&& countVehicleType >= LIMIT_MOTORCYCLE_COUNT) {
+		if ((vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_CAR) && countVehicleType >= LIMIT_CAR_COUNT)
+				|| (vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_MOTORCLYCLE)
+						&& countVehicleType >= LIMIT_MOTORCYCLE_COUNT)) {
 			throw new ExeptionEntryNotAllowed(MESSAGE_VEHICLE_LIMIT_REACHED);
 		}
 	}

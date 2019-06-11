@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import co.com.ceiba.adn.parking.TestBase;
 import co.com.ceiba.adn.parking.common.domain.ArgValidator;
+import co.com.ceiba.adn.parking.common.domain.exception.ExceptionEmpty;
 import co.com.ceiba.adn.parking.common.domain.exception.ExceptionInvalidValue;
 import co.com.ceiba.adn.parking.common.domain.exception.ExceptionLengthValue;
 import co.com.ceiba.adn.parking.common.domain.exception.ExceptionRequiredValue;
@@ -43,8 +44,8 @@ public class ArgValidatorTest {
 		ArrayList<Object> listNull = null;
 		
 		// Act - Assert
-		TestBase.assertThrows(() -> ArgValidator.validateListNotEmpty(listEmpty, MESSAGE), ExceptionRequiredValue.class);
-		TestBase.assertThrows(() -> ArgValidator.validateListNotEmpty(listNull, MESSAGE), ExceptionRequiredValue.class);
+		TestBase.assertThrows(() -> ArgValidator.validateListNotEmpty(listEmpty, MESSAGE), ExceptionEmpty.class);
+		TestBase.assertThrows(() -> ArgValidator.validateListNotEmpty(listNull, MESSAGE), ExceptionEmpty.class);
 	}
 	
 	@Test
@@ -66,5 +67,14 @@ public class ArgValidatorTest {
 		
 		// Act - Assert
 		TestBase.assertThrows(() -> ArgValidator.validateEqualTo(value, expectedValue, MESSAGE), ExceptionInvalidValue.class);
+	}
+	
+	@Test
+	public void validateNumeric () {
+		// Arrange
+		String number = "NUMBER";
+		
+		// Act - Assert
+		TestBase.assertThrows(() -> ArgValidator.validateNumeric(number, MESSAGE), ExceptionInvalidValue.class);
 	}
 }
