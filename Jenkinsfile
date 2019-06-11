@@ -20,7 +20,7 @@ pipeline{
 		}
 		
 		environment {
-        PROJECT_PATH_BACK = './parking'
+        PROJECT_PATH_BACK = './'
 		}
 		
 		stages{
