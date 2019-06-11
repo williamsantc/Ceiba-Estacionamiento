@@ -1,7 +1,9 @@
-package co.com.ceiba.adn.parking.infrastructure.command.controller;
+package co.com.ceiba.adn.parking.infrastructure.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -22,6 +24,7 @@ import co.com.ceiba.adn.parking.ApplicationMock;
 import co.com.ceiba.adn.parking.application.command.testdatabuilder.CommandEntryTestDataBuilder;
 import co.com.ceiba.adn.parking.service.application.command.CommandEntry;
 import co.com.ceiba.adn.parking.service.application.command.handle.CommandHandleCreateEntry;
+import co.com.ceiba.adn.parking.service.application.query.handle.QueryHandleEntryFindAll;
 import co.com.ceiba.adn.parking.service.domain.command.port.CommandPortEntry;
 import co.com.ceiba.adn.parking.service.domain.query.port.QueryPortEntry;
 import co.com.ceiba.adn.parking.service.infrastructure.command.controller.CommandEntryController;
@@ -29,7 +32,7 @@ import co.com.ceiba.adn.parking.service.infrastructure.command.controller.Comman
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes=ApplicationMock.class)
-@WebMvcTest(CommandEntryController.class)
+@WebMvcTest({CommandEntryController.class, CommandEntryController.class})
 public class CommandEntryControllerTest {
 
 	@Autowired
@@ -43,6 +46,19 @@ public class CommandEntryControllerTest {
 
 	@MockBean
 	private CommandHandleCreateEntry commandHandleCreateEntry;
+	
+	@MockBean
+	private QueryHandleEntryFindAll queryHandleEntryFindAll;
+
+	@Test
+	public void checkList() throws Exception {
+
+		// Arrange
+
+		// Act - Assert
+		this.mockMvc.perform(get("/entry")).andDo(print()).andExpect(status().isAccepted())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+	}
 
 	@Test
 	public void createEntry() throws Exception {
