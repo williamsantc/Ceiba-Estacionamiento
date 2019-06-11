@@ -19,15 +19,13 @@ public class TestBase {
 			assertTrue(e.getMessage().contains(message));
 		}
 	}
-
-	public static void assertThrows(Thunk thunk, Class<? extends Exception> exception, String message) {
+	
+	public static void assertThrows(Runnable runnable, Class<? extends Exception> exeption) {
 		try {
-			thunk.execute();
+			runnable.run();
 			fail();
 		} catch (Exception e) {
-			assertTrue(SE_ESPERABA_LA_EXCEPCION + exception.getCanonicalName() + PERO_FUE_LANZADA
-					+ e.getClass().getCanonicalName(), exception.isInstance(e));
-			assertTrue(e.getMessage().contains(message));
+			assertTrue(exeption.isInstance(e));
 		}
 	}
 

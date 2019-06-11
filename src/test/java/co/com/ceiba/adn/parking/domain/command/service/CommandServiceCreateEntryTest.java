@@ -1,5 +1,7 @@
 package co.com.ceiba.adn.parking.domain.command.service;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Calendar;
 
 import org.junit.Test;
@@ -93,6 +95,35 @@ public class CommandServiceCreateEntryTest {
 		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExeptionEntryNotAllowed.class,
 				messageVehicleLimitReached);
 
+	}
+
+	@Test
+	public void doCorrentInsert() {
+		
+		// Arrange
+		int limitMotorcycleCount = 10;
+		EntryTestDataBuilder entryTestDataBuilder = new EntryTestDataBuilder();
+		entryTestDataBuilder.withLicencePlate("DFR345");
+		Entry entry = entryTestDataBuilder.build();
+		entry.setId(1L);
+		
+	
+		QueryPortEntry queryPortEntry = Mockito.mock(QueryPortEntry.class);
+		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitMotorcycleCount);
+
+		CommandPortEntry commandPortEntry = Mockito.mock(CommandPortEntry.class);
+		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
+		
+		
+		CommandServiceCreateEntry commandServiceCreateEntry = new CommandServiceCreateEntry(queryPortEntry,
+				commandPortEntry);
+		
+		// Act
+		Long idCreated = commandServiceCreateEntry.exec(entry);
+		
+		// Assert
+		assertEquals(idCreated, entry.getId());
+		
 	}
 
 }

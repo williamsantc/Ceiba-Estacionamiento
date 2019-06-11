@@ -26,15 +26,15 @@ public class CommandServiceCreateEntry {
 
 	@Autowired
 	private QueryPortEntry queryPortEntry;
-	
+
 	// For testing purposes
-	public CommandServiceCreateEntry (QueryPortEntry queryPortEntry, CommandPortEntry commandPortEntry) {
+	public CommandServiceCreateEntry(QueryPortEntry queryPortEntry, CommandPortEntry commandPortEntry) {
 		this.queryPortEntry = queryPortEntry;
 		this.commandPortEntry = commandPortEntry;
 	}
 
 	public Long exec(Entry entry) {
-		this.validateAvailabilityEntryByLicencePlate(entry.getLicencePlate()	, entry.getEntryTime());
+		this.validateAvailabilityEntryByLicencePlate(entry.getLicencePlate(), entry.getEntryTime());
 		this.validateDisponibilidadEntryByVehicleType(entry.getVehicleType());
 		return this.commandPortEntry.insertEntry(entry).getId();
 	}
@@ -42,7 +42,8 @@ public class CommandServiceCreateEntry {
 	private void validateDisponibilidadEntryByVehicleType(String vehicleType) {
 		int countVehicleType = this.queryPortEntry.countByVehicleType(vehicleType);
 		if (vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_CAR) && countVehicleType >= LIMIT_CAR_COUNT
-				|| vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_MOTORCLYCLE) && countVehicleType >= LIMIT_MOTORCYCLE_COUNT) {
+				|| vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_MOTORCLYCLE)
+						&& countVehicleType >= LIMIT_MOTORCYCLE_COUNT) {
 			throw new ExeptionEntryNotAllowed(MESSAGE_VEHICLE_LIMIT_REACHED);
 		}
 	}
