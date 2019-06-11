@@ -20,8 +20,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Ingreso")
-public class EntityIngreso implements Serializable {
+@Table(name = "Entry")
+public class EntityEntry implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,15 +30,15 @@ public class EntityIngreso implements Serializable {
     private Long id;
 	
 	@Column
-	private String placa;
+	private String licencePlate;
 	
 	@Column
-	private String tipoVehiculo;
+	private String vehicleType;
 	
 	@Column
-	private String cilindraje;
+	private String engineDisplacement;
 	
 	@Column
-	private Calendar registroEntrada;
+	private Calendar entryTime;
 	
 }

@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import co.com.ceiba.adn.parking.common.application.CommandResponse;
-import co.com.ceiba.adn.parking.service.application.command.CommandIngreso;
-import co.com.ceiba.adn.parking.service.application.command.handle.CommandHandleCreateIngreso;
+import co.com.ceiba.adn.parking.service.application.command.CommandEntry;
+import co.com.ceiba.adn.parking.service.application.command.handle.CommandHandleCreateEntry;
 
 @RestControllerAdvice
 @RestController
-@RequestMapping("/ingreso")
+@RequestMapping("/entry")
 @CrossOrigin("*")
 public class CommandIngresoController {
 	
 	@Autowired
-	private CommandHandleCreateIngreso commandHandleCreateIngreso;
+	private CommandHandleCreateEntry commandHandleCreateEntry;
 
 	@PostMapping
-	public CommandResponse<Long> create (@RequestBody CommandIngreso commandIngreso) {
-		return commandHandleCreateIngreso.exec(commandIngreso);
+	public CommandResponse<Long> create (@RequestBody CommandEntry commandEntry) {
+		return commandHandleCreateEntry.exec(commandEntry);
 	}
 }

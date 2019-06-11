@@ -1,10 +1,10 @@
 package co.com.ceiba.adn.parking.service.application.exception;
 
-public class ExeptionIngresoNoPermitido extends RuntimeException {
+public class ExeptionEntryNotAllowed extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ExeptionIngresoNoPermitido(String message) {
+	public ExeptionEntryNotAllowed(String message) {
 		super(message);
 	}
 

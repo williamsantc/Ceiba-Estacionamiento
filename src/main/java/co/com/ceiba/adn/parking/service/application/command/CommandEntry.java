@@ -11,15 +11,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommandIngreso {
+public class CommandEntry {
 
 	private Long id;
 
-	private String placa;
+	private String licencePlate;
 
-	private String tipoVehiculo;
+	private String vehicleType;
 
-	private String cilindraje;
+	private String engineDisplacement;
 
-	private Calendar registroEntrada;
+	private Calendar entryTime;
 }

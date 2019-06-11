@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import co.com.ceiba.adn.parking.service.application.query.handle.QueryHandleIngresoFindAll;
-import co.com.ceiba.adn.parking.service.domain.model.Ingreso;
+import co.com.ceiba.adn.parking.service.application.query.handle.QueryHandleEntryFindAll;
+import co.com.ceiba.adn.parking.service.domain.model.Entry;
 
 @RestControllerAdvice
 @RestController
-@RequestMapping("/ingreso")
+@RequestMapping("/entry")
 @CrossOrigin("*")
 public class QueryIngresoController {
 
 	@Autowired
-	private QueryHandleIngresoFindAll queryHandleIngresoFindAll;
+	private QueryHandleEntryFindAll queryHandleEntryFindAll;
 		
 	@GetMapping
-	public ResponseEntity<List<Ingreso>> selectAll() {
-		return new ResponseEntity<>( queryHandleIngresoFindAll.handle() , HttpStatus.ACCEPTED);
+	public ResponseEntity<List<Entry>> selectAll() {
+		return new ResponseEntity<>( queryHandleEntryFindAll.handle() , HttpStatus.ACCEPTED);
 	}
 }
