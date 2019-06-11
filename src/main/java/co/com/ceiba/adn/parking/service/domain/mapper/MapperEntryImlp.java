@@ -18,10 +18,10 @@ public class MapperEntryImlp implements MapperEntry {
 	}
 
 	@Override
-	public List<Entry> mapFromEntityList(List<EntityEntry> listIngreso) {
+	public List<Entry> mapFromEntityList(List<EntityEntry> listEntry) {
 
 		List<Entry> lista = new ArrayList<>();
-		listIngreso.forEach(entityEntry -> lista.add(new Entry(entityEntry.getLicencePlate(),
+		listEntry.forEach(entityEntry -> lista.add(new Entry(entityEntry.getLicencePlate(),
 				entityEntry.getVehicleType(), entityEntry.getEngineDisplacement(), entityEntry.getEntryTime())));
 		return lista;
 	}

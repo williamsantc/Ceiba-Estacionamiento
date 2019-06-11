@@ -2,6 +2,8 @@ package co.com.ceiba.adn.parking.domain.mapper;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
@@ -40,5 +42,23 @@ public class MapperEntryTest {
 
 		// Assert
 		assertNotNull(entry);
+	}
+
+	@Test
+	public void mapFromEntityList() {
+
+		// Arrange
+		EntityEntryTestDataBuilder entityEntryTestDataBuilder = new EntityEntryTestDataBuilder();
+		entityEntryTestDataBuilder.withLicencePlate("ART123");
+		EntityEntry entityEntry = entityEntryTestDataBuilder.build();
+		ArrayList<EntityEntry> listEntityEntry = new ArrayList<>();
+		listEntityEntry.add(entityEntry);
+
+		// Act
+		ArrayList<Entry> listEntry = new ArrayList<>(mapperEntry.mapFromEntityList(listEntityEntry));
+
+		// Assert
+		assertNotNull(listEntry);
+
 	}
 }

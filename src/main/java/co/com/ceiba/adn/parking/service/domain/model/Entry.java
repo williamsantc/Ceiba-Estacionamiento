@@ -1,15 +1,14 @@
 package co.com.ceiba.adn.parking.service.domain.model;
 
+import static co.com.ceiba.adn.parking.common.domain.ArgValidator.validateRequired;
+
 import java.util.Calendar;
 
-import static co.com.ceiba.adn.parking.common.domain.ArgValidator.validateRequired;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class Entry {
 
 	// Constants
