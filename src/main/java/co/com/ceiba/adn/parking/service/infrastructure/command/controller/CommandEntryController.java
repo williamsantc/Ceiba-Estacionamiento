@@ -16,7 +16,7 @@ import co.com.ceiba.adn.parking.service.application.command.handle.CommandHandle
 @RestController
 @RequestMapping("/entry")
 @CrossOrigin("*")
-public class CommandIngresoController {
+public class CommandEntryController {
 	
 	@Autowired
 	private CommandHandleCreateEntry commandHandleCreateEntry;

@@ -17,7 +17,7 @@ public class FactoryEntry {
 	}
 
 	public Entry create(CommandEntry commandEntry) {
-		return new Entry(commandEntry.getId(), commandEntry.getLicencePlate(), commandEntry.getVehicleType(),
+		return new Entry(commandEntry.getLicencePlate(), commandEntry.getVehicleType(),
 				commandEntry.getEngineDisplacement(), Calendar.getInstance());
 	}
 }

@@ -2,9 +2,9 @@ package co.com.ceiba.adn.parking.domain.model;
 
 import org.junit.Test;
 
+import co.com.ceiba.adn.parking.TestBase;
 import co.com.ceiba.adn.parking.common.domain.exception.ExceptionRequiredValue;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
-import co.com.ceiba.adn.parking.parking.TestBase;
 
 public class ModelIngresoTest {
 

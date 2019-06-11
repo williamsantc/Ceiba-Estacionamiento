@@ -18,7 +18,7 @@ import co.com.ceiba.adn.parking.service.domain.model.Entry;
 @RestController
 @RequestMapping("/entry")
 @CrossOrigin("*")
-public class QueryIngresoController {
+public class QueryEntryController {
 
 	@Autowired
 	private QueryHandleEntryFindAll queryHandleEntryFindAll;

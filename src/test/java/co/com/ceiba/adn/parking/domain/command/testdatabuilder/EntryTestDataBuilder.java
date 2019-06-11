@@ -6,8 +6,6 @@ import co.com.ceiba.adn.parking.service.domain.model.Entry;
 
 public class EntryTestDataBuilder {
 
-	private Long id;
-
 	private String licencePlate;
 
 	private String vehicleType;
@@ -37,17 +35,12 @@ public class EntryTestDataBuilder {
 		return this;
 	}
 
-	public EntryTestDataBuilder withId(Long id) {
-		this.id = id;
-		return this;
-	}
-
 	public EntryTestDataBuilder withEntryTime(Calendar entryTime) {
 		this.entryTime = entryTime;
 		return this;
 	}
 
 	public Entry build() {
-		return new Entry(this.id, this.licencePlate, this.vehicleType, this.engineDisplacement, this.entryTime);
+		return new Entry(this.licencePlate, this.vehicleType, this.engineDisplacement, this.entryTime);
 	}
 }

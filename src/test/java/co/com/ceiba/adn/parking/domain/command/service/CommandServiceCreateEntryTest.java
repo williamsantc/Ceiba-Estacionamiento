@@ -5,8 +5,8 @@ import java.util.Calendar;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import co.com.ceiba.adn.parking.TestBase;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
-import co.com.ceiba.adn.parking.parking.TestBase;
 import co.com.ceiba.adn.parking.service.application.exception.ExeptionEntryNotAllowed;
 import co.com.ceiba.adn.parking.service.domain.command.port.CommandPortEntry;
 import co.com.ceiba.adn.parking.service.domain.command.serve.CommandServiceCreateEntry;
