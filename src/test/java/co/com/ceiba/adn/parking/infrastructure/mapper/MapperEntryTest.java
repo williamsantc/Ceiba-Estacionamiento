@@ -6,16 +6,18 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import co.com.ceiba.adn.TestBase;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
 import co.com.ceiba.adn.parking.domain.model.Entry;
 import co.com.ceiba.adn.parking.domain.model.EntryCore;
 import co.com.ceiba.adn.parking.infrastrcuture.mapper.MapperEntryImpl;
 import co.com.ceiba.adn.parking.infrastructure.command.testdatabuilder.EntityEntryTestDataBuilder;
 import co.com.ceiba.adn.parking.infrastructure.entity.EntityEntry;
+import co.com.ceiba.adn.parking.infrastructure.exception.ExceptionEntryNotFound;
 
 public class MapperEntryTest {
 
-	private static final MapperEntryImpl mapperEntry = new MapperEntryImpl();
+	private static final MapperEntryImpl mapperEntry = MapperEntryImpl.getInstance();
 
 	@Test
 	public void mapToEntity() {
@@ -43,6 +45,16 @@ public class MapperEntryTest {
 
 		// Assert
 		assertNotNull(entry);
+	}
+	
+	@Test
+	public void mapFromEntityFail() {
+
+		// Arrange
+		EntityEntry entityEntry = null;
+
+		// Act - Assert
+		TestBase.assertThrows(() -> mapperEntry.mapFromEntity(entityEntry), ExceptionEntryNotFound.class);
 	}
 
 	@Test
