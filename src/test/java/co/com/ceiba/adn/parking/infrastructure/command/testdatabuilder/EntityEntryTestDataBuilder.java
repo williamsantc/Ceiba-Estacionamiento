@@ -2,7 +2,7 @@ package co.com.ceiba.adn.parking.infrastructure.command.testdatabuilder;
 
 import java.util.Calendar;
 
-import co.com.ceiba.adn.parking.service.infrastructure.entity.EntityEntry;
+import co.com.ceiba.adn.parking.infrastructure.entity.EntityEntry;
 
 public class EntityEntryTestDataBuilder {
 

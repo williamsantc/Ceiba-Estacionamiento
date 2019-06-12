@@ -7,13 +7,13 @@ import java.util.Calendar;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import co.com.ceiba.adn.parking.TestBase;
+import co.com.ceiba.adn.TestBase;
+import co.com.ceiba.adn.parking.application.exception.ExceptionEntryNotAllowed;
+import co.com.ceiba.adn.parking.domain.command.port.CommandPortEntry;
+import co.com.ceiba.adn.parking.domain.command.service.CommandServiceCreateEntry;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
-import co.com.ceiba.adn.parking.service.application.exception.ExeptionEntryNotAllowed;
-import co.com.ceiba.adn.parking.service.domain.command.port.CommandPortEntry;
-import co.com.ceiba.adn.parking.service.domain.command.serve.CommandServiceCreateEntry;
-import co.com.ceiba.adn.parking.service.domain.model.Entry;
-import co.com.ceiba.adn.parking.service.domain.query.port.QueryPortEntry;
+import co.com.ceiba.adn.parking.domain.model.Entry;
+import co.com.ceiba.adn.parking.domain.query.port.QueryPortEntry;
 
 public class CommandServiceCreateEntryTest {
 
@@ -39,7 +39,7 @@ public class CommandServiceCreateEntryTest {
 				commandPortEntry);
 
 		// Act - Assert
-		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExeptionEntryNotAllowed.class,
+		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExceptionEntryNotAllowed.class,
 				messageLicencePlateNotAllowed);
 	}
 
@@ -66,7 +66,7 @@ public class CommandServiceCreateEntryTest {
 				commandPortEntry);
 
 		// Act - Assert
-		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExeptionEntryNotAllowed.class,
+		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExceptionEntryNotAllowed.class,
 				messageVehicleLimitReached);
 
 	}
@@ -94,7 +94,7 @@ public class CommandServiceCreateEntryTest {
 				commandPortEntry);
 
 		// Act - Assert
-		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExeptionEntryNotAllowed.class,
+		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExceptionEntryNotAllowed.class,
 				messageVehicleLimitReached);
 
 	}

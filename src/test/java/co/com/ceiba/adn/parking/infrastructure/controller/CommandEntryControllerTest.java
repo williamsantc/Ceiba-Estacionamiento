@@ -20,15 +20,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import co.com.ceiba.adn.parking.ApplicationMock;
+import co.com.ceiba.adn.ApplicationMock;
+import co.com.ceiba.adn.parking.application.command.CommandEntry;
+import co.com.ceiba.adn.parking.application.command.handle.CommandHandleCreateEntry;
 import co.com.ceiba.adn.parking.application.command.testdatabuilder.CommandEntryTestDataBuilder;
-import co.com.ceiba.adn.parking.service.application.command.CommandEntry;
-import co.com.ceiba.adn.parking.service.application.command.handle.CommandHandleCreateEntry;
-import co.com.ceiba.adn.parking.service.application.query.handle.QueryHandleEntryFindAll;
-import co.com.ceiba.adn.parking.service.domain.command.port.CommandPortEntry;
-import co.com.ceiba.adn.parking.service.domain.query.port.QueryPortEntry;
-import co.com.ceiba.adn.parking.service.infrastructure.command.controller.CommandEntryController;
-import co.com.ceiba.adn.parking.service.infrastructure.query.controller.QueryEntryController;
+import co.com.ceiba.adn.parking.application.query.handle.QueryHandleEntryFindAll;
+import co.com.ceiba.adn.parking.domain.command.port.CommandPortEntry;
+import co.com.ceiba.adn.parking.domain.query.port.QueryPortEntry;
+import co.com.ceiba.adn.parking.infrastructure.command.controller.CommandEntryController;
+import co.com.ceiba.adn.parking.infrastructure.query.controller.QueryEntryController;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ApplicationMock.class)

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import co.com.ceiba.adn.parking.TestBase;
-import co.com.ceiba.adn.parking.common.domain.ArgValidator;
-import co.com.ceiba.adn.parking.common.domain.exception.ExceptionEmpty;
-import co.com.ceiba.adn.parking.common.domain.exception.ExceptionInvalidValue;
-import co.com.ceiba.adn.parking.common.domain.exception.ExceptionLengthValue;
-import co.com.ceiba.adn.parking.common.domain.exception.ExceptionRequiredValue;
+import co.com.ceiba.adn.TestBase;
+import co.com.ceiba.adn.common.domain.ArgValidator;
+import co.com.ceiba.adn.common.domain.exception.ExceptionEmpty;
+import co.com.ceiba.adn.common.domain.exception.ExceptionInvalidValue;
+import co.com.ceiba.adn.common.domain.exception.ExceptionLengthValue;
+import co.com.ceiba.adn.common.domain.exception.ExceptionRequiredValue;
 
 public class ArgValidatorTest {
 

@@ -2,7 +2,7 @@ package co.com.ceiba.adn.parking.domain.command.testdatabuilder;
 
 import java.util.Calendar;
 
-import co.com.ceiba.adn.parking.service.domain.model.Entry;
+import co.com.ceiba.adn.parking.domain.model.Entry;
 
 public class EntryTestDataBuilder {
 

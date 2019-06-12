@@ -2,7 +2,7 @@ package co.com.ceiba.adn.parking.application.command.testdatabuilder;
 
 import java.util.Calendar;
 
-import co.com.ceiba.adn.parking.service.application.command.CommandEntry;
+import co.com.ceiba.adn.parking.application.command.CommandEntry;
 
 public class CommandEntryTestDataBuilder {
 
