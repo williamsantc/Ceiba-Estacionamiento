@@ -30,10 +30,9 @@ import co.com.ceiba.adn.parking.service.domain.query.port.QueryPortEntry;
 import co.com.ceiba.adn.parking.service.infrastructure.command.controller.CommandEntryController;
 import co.com.ceiba.adn.parking.service.infrastructure.query.controller.QueryEntryController;
 
-
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes=ApplicationMock.class)
-@WebMvcTest({CommandEntryController.class, QueryEntryController.class})
+@ContextConfiguration(classes = ApplicationMock.class)
+@WebMvcTest({ CommandEntryController.class, QueryEntryController.class })
 public class CommandEntryControllerTest {
 
 	@Autowired
@@ -47,17 +46,16 @@ public class CommandEntryControllerTest {
 
 	@MockBean
 	private CommandHandleCreateEntry commandHandleCreateEntry;
-	
+
 	@MockBean
 	private QueryHandleEntryFindAll queryHandleEntryFindAll;
 
 	@Test
 	public void checkList() throws Exception {
 
-		// Arrange
-
-		// Act - Assert
+		// Act
 		this.mockMvc.perform(get("/entry")).andDo(print()).andExpect(status().isAccepted())
+				// Assert
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 	}
 
@@ -65,7 +63,7 @@ public class CommandEntryControllerTest {
 	public void createEntry() throws Exception {
 
 		// Arrange
-		
+
 		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
 		CommandEntry commandEntry = commandEntryTestDataBuilder.withLicencePlate(null).build();
 		ObjectMapper mapper = new ObjectMapper();
@@ -74,8 +72,10 @@ public class CommandEntryControllerTest {
 
 		String entryJson = ow.writeValueAsString(commandEntry);
 
-		// Act - Assert
+		// Act
 		this.mockMvc.perform(post("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson))
-				.andDo(print()).andExpect(status().isOk());
+				.andDo(print())
+				// Assert
+				.andExpect(status().isOk());
 	}
 }
