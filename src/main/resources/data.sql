@@ -1,1 +1,1 @@
-insert into entry (id, licence_plate, vehicle_type, entry_time) values (1, 'ASD456', 'CAR', now());
+insert into entry (id, licence_plate, vehicle_type, entry_time) values (100, 'ASD456', 'CAR', now());

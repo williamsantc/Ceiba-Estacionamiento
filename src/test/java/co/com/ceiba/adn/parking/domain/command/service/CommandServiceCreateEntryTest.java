@@ -49,10 +49,11 @@ public class CommandServiceCreateEntryTest {
 		// Arrange
 		String messageVehicleLimitReached = "Ingreso no permitido, no hay mas cupo en el parqueadero.";
 		String fieldVehicleType = "CAR";
+		String fieldLicencePlate = "DFR345";
 		int limitCarCount = 20;
 
 		EntryTestDataBuilder entryTestDataBuilder = new EntryTestDataBuilder();
-		entryTestDataBuilder.withLicencePlate("DFR345").withVehicleType(fieldVehicleType);
+		entryTestDataBuilder.withLicencePlate(fieldLicencePlate).withVehicleType(fieldVehicleType);
 		Entry entry = entryTestDataBuilder.build();
 
 		QueryPortEntry queryPortEntry = Mockito.mock(QueryPortEntry.class);
@@ -76,10 +77,11 @@ public class CommandServiceCreateEntryTest {
 		// Arrange
 		String messageVehicleLimitReached = "Ingreso no permitido, no hay mas cupo en el parqueadero.";
 		String fieldVehicleType = "MOTORCYCLE";
+		String fildLicencePlate = "HFR345";
 		int limitMotorcycleCount = 10;
 
 		EntryTestDataBuilder entryTestDataBuilder = new EntryTestDataBuilder();
-		entryTestDataBuilder.withLicencePlate("DFR345").withVehicleType(fieldVehicleType).withEngineDisplacement("100");
+		entryTestDataBuilder.withLicencePlate(fildLicencePlate).withVehicleType(fieldVehicleType).withEngineDisplacement("100");
 		Entry entry = entryTestDataBuilder.build();
 
 		QueryPortEntry queryPortEntry = Mockito.mock(QueryPortEntry.class);

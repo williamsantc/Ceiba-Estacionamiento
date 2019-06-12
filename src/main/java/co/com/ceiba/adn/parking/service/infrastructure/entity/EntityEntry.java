@@ -27,6 +27,7 @@ public class EntityEntry implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column
     private Long id;
 	
 	@Column
