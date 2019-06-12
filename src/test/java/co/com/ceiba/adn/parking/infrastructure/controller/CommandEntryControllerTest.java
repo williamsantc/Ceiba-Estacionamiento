@@ -28,11 +28,12 @@ import co.com.ceiba.adn.parking.service.application.query.handle.QueryHandleEntr
 import co.com.ceiba.adn.parking.service.domain.command.port.CommandPortEntry;
 import co.com.ceiba.adn.parking.service.domain.query.port.QueryPortEntry;
 import co.com.ceiba.adn.parking.service.infrastructure.command.controller.CommandEntryController;
+import co.com.ceiba.adn.parking.service.infrastructure.query.controller.QueryEntryController;
 
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes=ApplicationMock.class)
-@WebMvcTest({CommandEntryController.class, CommandEntryController.class})
+@WebMvcTest({CommandEntryController.class, QueryEntryController.class})
 public class CommandEntryControllerTest {
 
 	@Autowired

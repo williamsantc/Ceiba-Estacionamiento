@@ -9,12 +9,12 @@ import org.junit.Test;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
 import co.com.ceiba.adn.parking.infrastructure.command.testdatabuilder.EntityEntryTestDataBuilder;
 import co.com.ceiba.adn.parking.service.domain.model.Entry;
-import co.com.ceiba.adn.parking.service.infrastrcuture.mapper.MapperEntryImlp;
+import co.com.ceiba.adn.parking.service.infrastrcuture.mapper.MapperEntryImpl;
 import co.com.ceiba.adn.parking.service.infrastructure.entity.EntityEntry;
 
 public class MapperEntryTest {
 
-	private static final MapperEntryImlp mapperEntry = new MapperEntryImlp();
+	private static final MapperEntryImpl mapperEntry = new MapperEntryImpl();
 
 	@Test
 	public void mapToEntity() {

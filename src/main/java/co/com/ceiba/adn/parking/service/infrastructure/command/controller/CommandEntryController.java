@@ -17,12 +17,16 @@ import co.com.ceiba.adn.parking.service.application.command.handle.CommandHandle
 @RequestMapping("/entry")
 @CrossOrigin("*")
 public class CommandEntryController {
-	
-	@Autowired
+
 	private CommandHandleCreateEntry commandHandleCreateEntry;
 
+	@Autowired
+	public CommandEntryController(CommandHandleCreateEntry commandHandleCreateEntry) {
+		this.commandHandleCreateEntry = commandHandleCreateEntry;
+	}
+
 	@PostMapping
-	public CommandResponse<Long> create (@RequestBody CommandEntry commandEntry) {
+	public CommandResponse<Long> create(@RequestBody CommandEntry commandEntry) {
 		return commandHandleCreateEntry.exec(commandEntry);
 	}
 }

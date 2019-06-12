@@ -2,15 +2,11 @@ package co.com.ceiba.adn.parking.service.domain.command.serve;
 
 import java.util.Calendar;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import co.com.ceiba.adn.parking.service.application.exception.ExeptionEntryNotAllowed;
 import co.com.ceiba.adn.parking.service.domain.command.port.CommandPortEntry;
 import co.com.ceiba.adn.parking.service.domain.model.Entry;
 import co.com.ceiba.adn.parking.service.domain.query.port.QueryPortEntry;
 
-@Component
 public class CommandServiceCreateEntry {
 
 	private static final String FIELD_VEHICLETYPE_VALUE_CAR = "CAR";
@@ -21,13 +17,10 @@ public class CommandServiceCreateEntry {
 	private static final String MESSAGE_VEHICLE_LIMIT_REACHED = "Ingreso no permitido, no hay mas cupo en el parqueadero.";
 	private static final String MESSAGE_LICENCEPLATE_NOT_ALLOWED = "Ingreso no permitido, el tipo de placa indicado solo tiene permitido el ingreso los días domingo y lunes.";
 
-	@Autowired
 	private CommandPortEntry commandPortEntry;
 
-	@Autowired
 	private QueryPortEntry queryPortEntry;
 
-	// For testing purposes
 	public CommandServiceCreateEntry(QueryPortEntry queryPortEntry, CommandPortEntry commandPortEntry) {
 		this.queryPortEntry = queryPortEntry;
 		this.commandPortEntry = commandPortEntry;

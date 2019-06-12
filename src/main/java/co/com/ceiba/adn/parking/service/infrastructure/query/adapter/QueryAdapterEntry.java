@@ -2,26 +2,27 @@ package co.com.ceiba.adn.parking.service.infrastructure.query.adapter;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import co.com.ceiba.adn.parking.service.domain.model.Entry;
 import co.com.ceiba.adn.parking.service.domain.query.port.QueryPortEntry;
-import co.com.ceiba.adn.parking.service.infrastrcuture.mapper.MapperEntryImlp;
+import co.com.ceiba.adn.parking.service.infrastrcuture.mapper.MapperEntryImpl;
 import co.com.ceiba.adn.parking.service.infrastructure.repository.RepositoryEntry;
 
 @Component
 public class QueryAdapterEntry implements QueryPortEntry {
 	
-	@Autowired
-	private RepositoryEntry repositoryEntry;
+	private final RepositoryEntry repositoryEntry;
 	
-	@Autowired
-	private MapperEntryImlp mapperEntryImlp;
+	private final MapperEntryImpl mapperIngresoEntry = MapperEntryImpl.getInstance();
+	
+	public QueryAdapterEntry(RepositoryEntry repositoryEntry) {
+		this.repositoryEntry = repositoryEntry;
+	}
 
 	@Override
 	public List<Entry> findAll() {
-		return this.mapperEntryImlp.mapFromEntityList(repositoryEntry.findAll());
+		return this.mapperIngresoEntry.mapFromEntityList(repositoryEntry.findAll());
 	}
 
 	@Override

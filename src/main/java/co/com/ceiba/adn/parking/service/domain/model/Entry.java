@@ -4,12 +4,7 @@ import static co.com.ceiba.adn.parking.common.domain.ArgValidator.validateRequir
 
 import java.util.Calendar;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class Entry {
+public class Entry {	
 
 	// Constants
 
@@ -39,13 +34,49 @@ public class Entry {
 		this.engineDisplacement = engineDisplacement;
 		this.entryTime = entryTime;
 	}
-	
-	public Entry(Long id, String licencePlate, String vehicleType, String engineDisplacement, Calendar entryTime) {
+
+	public Entry() {}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getLicencePlate() {
+		return licencePlate;
+	}
+
+	public void setLicencePlate(String licencePlate) {
 		this.licencePlate = licencePlate;
+	}
+
+	public String getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(String vehicleType) {
 		this.vehicleType = vehicleType;
+	}
+
+	public String getEngineDisplacement() {
+		return engineDisplacement;
+	}
+
+	public void setEngineDisplacement(String engineDisplacement) {
 		this.engineDisplacement = engineDisplacement;
+	}
+
+	public Calendar getEntryTime() {
+		return entryTime;
+	}
+
+	public void setEntryTime(Calendar entryTime) {
 		this.entryTime = entryTime;
 	}
+	
+	
 
 }

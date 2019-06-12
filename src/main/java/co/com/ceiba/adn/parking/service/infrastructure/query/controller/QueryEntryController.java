@@ -20,8 +20,12 @@ import co.com.ceiba.adn.parking.service.domain.model.Entry;
 @CrossOrigin("*")
 public class QueryEntryController {
 
+	private final QueryHandleEntryFindAll queryHandleEntryFindAll;
+
 	@Autowired
-	private QueryHandleEntryFindAll queryHandleEntryFindAll;
+	public QueryEntryController(QueryHandleEntryFindAll queryHandleEntryFindAll) {
+		this.queryHandleEntryFindAll = queryHandleEntryFindAll;
+	}
 		
 	@GetMapping
 	public ResponseEntity<List<Entry>> selectAll() {
