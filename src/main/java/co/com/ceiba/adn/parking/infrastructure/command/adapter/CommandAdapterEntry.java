@@ -22,4 +22,8 @@ public class CommandAdapterEntry implements CommandPortEntry {
 	public Entry insertEntry(Entry entry) {
 		return mapperIngresoEntry.mapFromEntity(repositoryEntry.save(mapperIngresoEntry.mapToEntity(entry)));
 	}
+	
+	public void deleteEntry(Entry entry) {
+		repositoryEntry.delete(mapperIngresoEntry.mapToEntity(entry));
+	}
 }
