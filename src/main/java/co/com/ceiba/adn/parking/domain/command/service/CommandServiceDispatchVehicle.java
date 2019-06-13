@@ -1,8 +1,8 @@
 package co.com.ceiba.adn.parking.domain.command.service;
 
 import co.com.ceiba.adn.parking.domain.command.repository.CommandRepositoryEntry;
-import co.com.ceiba.adn.parking.domain.command.strategy.FactoryCalculatePayment;
-import co.com.ceiba.adn.parking.domain.command.strategy.IECalculatePayment;
+import co.com.ceiba.adn.parking.domain.command.strategy.calculatepayment.FactoryCalculatePayment;
+import co.com.ceiba.adn.parking.domain.command.strategy.calculatepayment.IECalculatePayment;
 import co.com.ceiba.adn.parking.domain.model.Entry;
 import co.com.ceiba.adn.parking.domain.query.repository.QueryRepositoryEntry;
 

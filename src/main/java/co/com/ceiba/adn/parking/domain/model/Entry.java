@@ -30,7 +30,7 @@ public class Entry {
 
 	private Calendar entryTime;
 
-	public Entry(String licencePlate, String vehicleType, String engineDisplacement, Calendar entryTime) {
+	public Entry(Long id, String licencePlate, String vehicleType, String engineDisplacement, Calendar entryTime) {
 		validateRequired(licencePlate, MESSAGE_LICENCEPLATE_REQUIRED);
 		validateRequired(vehicleType, MESSAGE_VEHICLE_TYPE_REQUIRED);
 		this.validateVehicleType(vehicleType);
@@ -38,6 +38,7 @@ public class Entry {
 			validateRequired(engineDisplacement, MESSAGE_ENGINE_DISPLACEMENT_REQUIRED);
 			validateNumeric(engineDisplacement, MESSAGE_ENGINE_DISPLACEMENT_WRONG_TYPE);
 		}
+		this.id = id;
 		this.licencePlate = licencePlate;
 		this.vehicleType = vehicleType;
 		this.engineDisplacement = engineDisplacement;

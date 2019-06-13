@@ -1,4 +1,4 @@
-package co.com.ceiba.adn.parking.domain.command.strategy;
+package co.com.ceiba.adn.parking.domain.command.strategy.calculatepayment;
 
 import co.com.ceiba.adn.parking.domain.model.Entry;
 

@@ -41,7 +41,7 @@ public class MapperEntryImpl implements MapperEntry {
 		if (entityEntry == null) {
 			throw new ExceptionEntryNotFound(MESSAGE_ENTRY_NOT_FOUND);
 		}
-		return new Entry(entityEntry.getLicencePlate(), entityEntry.getVehicleType(),
+		return new Entry(entityEntry.getId(), entityEntry.getLicencePlate(), entityEntry.getVehicleType(),
 				entityEntry.getEngineDisplacement(), entityEntry.getEntryTime());
 	}
 
