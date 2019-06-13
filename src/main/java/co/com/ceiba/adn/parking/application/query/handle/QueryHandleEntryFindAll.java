@@ -4,19 +4,19 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import co.com.ceiba.adn.parking.domain.model.EntryCore;
-import co.com.ceiba.adn.parking.domain.query.port.QueryPortEntry;
+import co.com.ceiba.adn.parking.domain.model.EntryDto;
+import co.com.ceiba.adn.parking.domain.query.repository.QueryRepositoryEntry;
 
 @Component
 public class QueryHandleEntryFindAll {
 
-	private final QueryPortEntry queryPortEntry;
+	private final QueryRepositoryEntry queryRepositoryEntry;
 	
-	public QueryHandleEntryFindAll(QueryPortEntry queryPortEntry) {
-		this.queryPortEntry = queryPortEntry;
+	public QueryHandleEntryFindAll(QueryRepositoryEntry queryRepositoryEntry) {
+		this.queryRepositoryEntry = queryRepositoryEntry;
 	}
 	
-	public List<EntryCore> handle() {
-		return this.queryPortEntry.findAll();
+	public List<EntryDto> handle() {
+		return this.queryRepositoryEntry.findAll();
 	}
 }

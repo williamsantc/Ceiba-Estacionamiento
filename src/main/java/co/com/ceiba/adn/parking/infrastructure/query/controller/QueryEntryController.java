@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import co.com.ceiba.adn.parking.application.query.handle.QueryHandleEntryFindAll;
-import co.com.ceiba.adn.parking.domain.model.EntryCore;
+import co.com.ceiba.adn.parking.domain.model.EntryDto;
 
 @RestControllerAdvice
 @RestController
@@ -28,7 +28,7 @@ public class QueryEntryController {
 	}
 		
 	@GetMapping
-	public ResponseEntity<List<EntryCore>> selectAll() {
+	public ResponseEntity<List<EntryDto>> selectAll() {
 		return new ResponseEntity<>( queryHandleEntryFindAll.handle() , HttpStatus.ACCEPTED);
 	}
 }

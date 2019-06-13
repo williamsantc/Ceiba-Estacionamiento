@@ -3,7 +3,7 @@ package co.com.ceiba.adn.parking.domain.model;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class EntryCore {
+public class EntryDto {
 
 	private String licencePlate;
 
@@ -11,7 +11,7 @@ public class EntryCore {
 	
 	private String entryTime;
 	
-	public EntryCore(String licencePlate, String vehicleType, Calendar entryTime) {
+	public EntryDto(String licencePlate, String vehicleType, Calendar entryTime) {
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
 		this.licencePlate = licencePlate;

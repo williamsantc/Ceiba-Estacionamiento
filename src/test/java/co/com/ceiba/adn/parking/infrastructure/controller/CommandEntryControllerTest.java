@@ -25,8 +25,8 @@ import co.com.ceiba.adn.parking.application.command.CommandEntry;
 import co.com.ceiba.adn.parking.application.command.handle.CommandHandleCreateEntry;
 import co.com.ceiba.adn.parking.application.command.testdatabuilder.CommandEntryTestDataBuilder;
 import co.com.ceiba.adn.parking.application.query.handle.QueryHandleEntryFindAll;
-import co.com.ceiba.adn.parking.domain.command.port.CommandPortEntry;
-import co.com.ceiba.adn.parking.domain.query.port.QueryPortEntry;
+import co.com.ceiba.adn.parking.domain.command.repository.CommandRepositoryEntry;
+import co.com.ceiba.adn.parking.domain.query.repository.QueryRepositoryEntry;
 import co.com.ceiba.adn.parking.infrastructure.command.controller.CommandEntryController;
 import co.com.ceiba.adn.parking.infrastructure.query.controller.QueryEntryController;
 
@@ -39,10 +39,10 @@ public class CommandEntryControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private QueryPortEntry queryPortEntry;
+	private QueryRepositoryEntry queryPortEntry;
 
 	@MockBean
-	private CommandPortEntry commandPortEntry;
+	private CommandRepositoryEntry commandPortEntry;
 
 	@MockBean
 	private CommandHandleCreateEntry commandHandleCreateEntry;

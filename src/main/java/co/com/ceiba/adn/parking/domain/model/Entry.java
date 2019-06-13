@@ -1,17 +1,24 @@
 package co.com.ceiba.adn.parking.domain.model;
 
+import static co.com.ceiba.adn.common.domain.ArgValidator.validateNumeric;
 import static co.com.ceiba.adn.common.domain.ArgValidator.validateRequired;
 
 import java.util.Calendar;
 
-public class Entry {	
+import co.com.ceiba.adn.parking.domain.exception.ExceptionWrongVehicleType;
+
+public class Entry {
 
 	// Constants
 
 	private static final String MESSAGE_LICENCEPLATE_REQUIRED = "Campos incompletos, el campo placa es querido.";
 	private static final String MESSAGE_VEHICLE_TYPE_REQUIRED = "Campos incompletos, el campo tipo vehiculo es querido.";
 	private static final String MESSAGE_ENGINE_DISPLACEMENT_REQUIRED = "Campos incompletos, el campo cilindraje es querido.";
+	private static final String MESSAGE_ENGINE_DISPLACEMENT_WRONG_TYPE = "Error, el campo cilindraje no posee un dato válido.";
+	private static final String MESSAGE_WRONG_VEHICLE_TYPE = "Error, el campo tipo vehiculo posee un dato no válido.";
+	
 	private static final String FIELD_VEHICLETYPE_VALUE_MOTORCYCLE = "MOTORCYCLE";
+	private static final String FIELD_VEHICLETYPE_VALUE_CAR = "CAR";
 
 	private Long id;
 
@@ -26,8 +33,10 @@ public class Entry {
 	public Entry(String licencePlate, String vehicleType, String engineDisplacement, Calendar entryTime) {
 		validateRequired(licencePlate, MESSAGE_LICENCEPLATE_REQUIRED);
 		validateRequired(vehicleType, MESSAGE_VEHICLE_TYPE_REQUIRED);
+		this.validateVehicleType(vehicleType);
 		if (vehicleType.equalsIgnoreCase(FIELD_VEHICLETYPE_VALUE_MOTORCYCLE)) {
 			validateRequired(engineDisplacement, MESSAGE_ENGINE_DISPLACEMENT_REQUIRED);
+			validateNumeric(engineDisplacement, MESSAGE_ENGINE_DISPLACEMENT_WRONG_TYPE);
 		}
 		this.licencePlate = licencePlate;
 		this.vehicleType = vehicleType;
@@ -35,30 +44,23 @@ public class Entry {
 		this.entryTime = entryTime;
 	}
 
-	public Entry() {}
+	private void validateVehicleType(String vehicleType) {
+		if (!vehicleType.contentEquals(FIELD_VEHICLETYPE_VALUE_CAR)
+				&& !vehicleType.contentEquals(FIELD_VEHICLETYPE_VALUE_MOTORCYCLE)) {
+			throw new ExceptionWrongVehicleType(MESSAGE_WRONG_VEHICLE_TYPE);
+		}
+	}
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getLicencePlate() {
 		return licencePlate;
 	}
 
-	public void setLicencePlate(String licencePlate) {
-		this.licencePlate = licencePlate;
-	}
-
 	public String getVehicleType() {
 		return vehicleType;
-	}
-
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
 	}
 
 	public String getEngineDisplacement() {
@@ -76,7 +78,5 @@ public class Entry {
 	public void setEntryTime(Calendar entryTime) {
 		this.entryTime = entryTime;
 	}
-	
-	
 
 }

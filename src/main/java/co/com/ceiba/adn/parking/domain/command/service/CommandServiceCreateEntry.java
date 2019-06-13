@@ -2,10 +2,10 @@ package co.com.ceiba.adn.parking.domain.command.service;
 
 import java.util.Calendar;
 
-import co.com.ceiba.adn.parking.application.exception.ExceptionEntryNotAllowed;
-import co.com.ceiba.adn.parking.domain.command.port.CommandPortEntry;
+import co.com.ceiba.adn.parking.domain.command.repository.CommandRepositoryEntry;
+import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotAllowed;
 import co.com.ceiba.adn.parking.domain.model.Entry;
-import co.com.ceiba.adn.parking.domain.query.port.QueryPortEntry;
+import co.com.ceiba.adn.parking.domain.query.repository.QueryRepositoryEntry;
 
 public class CommandServiceCreateEntry {
 
@@ -17,11 +17,11 @@ public class CommandServiceCreateEntry {
 	private static final String MESSAGE_VEHICLE_LIMIT_REACHED = "Ingreso no permitido, no hay mas cupo en el parqueadero.";
 	private static final String MESSAGE_LICENCEPLATE_NOT_ALLOWED = "Ingreso no permitido, el tipo de placa indicado solo tiene permitido el ingreso los días domingo y lunes.";
 
-	private CommandPortEntry commandPortEntry;
+	private CommandRepositoryEntry commandPortEntry;
 
-	private QueryPortEntry queryPortEntry;
+	private QueryRepositoryEntry queryPortEntry;
 
-	public CommandServiceCreateEntry(QueryPortEntry queryPortEntry, CommandPortEntry commandPortEntry) {
+	public CommandServiceCreateEntry(QueryRepositoryEntry queryPortEntry, CommandRepositoryEntry commandPortEntry) {
 		this.queryPortEntry = queryPortEntry;
 		this.commandPortEntry = commandPortEntry;
 	}

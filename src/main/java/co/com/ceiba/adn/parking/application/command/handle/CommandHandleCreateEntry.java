@@ -12,18 +12,18 @@ import co.com.ceiba.adn.parking.domain.model.Entry;
 @Component
 public class CommandHandleCreateEntry implements CommandHandleResponse<CommandEntry, CommandResponse<Long>> {
 
-	private CommandServiceCreateEntry commandServiceEntry;
+	private CommandServiceCreateEntry commandServiceCreateEntry;
 	
 	private FactoryEntry factoryEntry = FactoryEntry.getInstance();
 	
 	public CommandHandleCreateEntry (CommandServiceCreateEntry commandServiceEntry) {
-		this.commandServiceEntry = commandServiceEntry;
+		this.commandServiceCreateEntry = commandServiceEntry;
 	}
 	
 	@Override
 	public CommandResponse<Long> exec(CommandEntry commandEntry) {
 		Entry entry = factoryEntry.create(commandEntry);
-		return new CommandResponse<>(this.commandServiceEntry.exec(entry));
+		return new CommandResponse<>(this.commandServiceCreateEntry.exec(entry));
 	}
 
 }

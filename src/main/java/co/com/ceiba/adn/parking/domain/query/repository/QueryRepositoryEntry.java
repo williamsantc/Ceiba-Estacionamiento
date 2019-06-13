@@ -1,13 +1,13 @@
-package co.com.ceiba.adn.parking.domain.query.port;
+package co.com.ceiba.adn.parking.domain.query.repository;
 
 import java.util.List;
 
 import co.com.ceiba.adn.parking.domain.model.Entry;
-import co.com.ceiba.adn.parking.domain.model.EntryCore;
+import co.com.ceiba.adn.parking.domain.model.EntryDto;
 
-public interface QueryPortEntry {
+public interface QueryRepositoryEntry {
 	
-	List<EntryCore> findAll();
+	List<EntryDto> findAll();
 	
 	int countByVehicleType(String tipoVehiculo);
 	

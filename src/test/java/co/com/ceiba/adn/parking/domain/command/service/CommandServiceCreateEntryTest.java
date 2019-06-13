@@ -8,12 +8,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import co.com.ceiba.adn.TestBase;
-import co.com.ceiba.adn.parking.application.exception.ExceptionEntryNotAllowed;
-import co.com.ceiba.adn.parking.domain.command.port.CommandPortEntry;
-import co.com.ceiba.adn.parking.domain.command.service.CommandServiceCreateEntry;
+import co.com.ceiba.adn.parking.domain.command.repository.CommandRepositoryEntry;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
+import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotAllowed;
 import co.com.ceiba.adn.parking.domain.model.Entry;
-import co.com.ceiba.adn.parking.domain.query.port.QueryPortEntry;
+import co.com.ceiba.adn.parking.domain.query.repository.QueryRepositoryEntry;
 
 public class CommandServiceCreateEntryTest {
 
@@ -21,7 +20,8 @@ public class CommandServiceCreateEntryTest {
 	public void validateInsertEntryWithLicencePlateValueA() {
 		// Arrange
 		String messageLicencePlateNotAllowed = "Ingreso no permitido, el tipo de placa indicado solo tiene permitido el ingreso los días domingo y lunes.";
-
+		int limitCount = 20;
+		
 		Calendar date = Calendar.getInstance();
 		date.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY); // Date greater than MONDAY
 
@@ -29,10 +29,10 @@ public class CommandServiceCreateEntryTest {
 		entryTestDataBuilder.withLicencePlate("ASD123").withEntryTime(date);
 		Entry entry = entryTestDataBuilder.build();
 
-		QueryPortEntry queryPortEntry = Mockito.mock(QueryPortEntry.class);
-		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(4);
+		QueryRepositoryEntry queryPortEntry = Mockito.mock(QueryRepositoryEntry.class);
+		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitCount);
 
-		CommandPortEntry commandPortEntry = Mockito.mock(CommandPortEntry.class);
+		CommandRepositoryEntry commandPortEntry = Mockito.mock(CommandRepositoryEntry.class);
 		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
 
 		CommandServiceCreateEntry commandServiceCreateEntry = new CommandServiceCreateEntry(queryPortEntry,
@@ -56,10 +56,10 @@ public class CommandServiceCreateEntryTest {
 		entryTestDataBuilder.withLicencePlate(fieldLicencePlate).withVehicleType(fieldVehicleType);
 		Entry entry = entryTestDataBuilder.build();
 
-		QueryPortEntry queryPortEntry = Mockito.mock(QueryPortEntry.class);
+		QueryRepositoryEntry queryPortEntry = Mockito.mock(QueryRepositoryEntry.class);
 		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitCarCount);
 
-		CommandPortEntry commandPortEntry = Mockito.mock(CommandPortEntry.class);
+		CommandRepositoryEntry commandPortEntry = Mockito.mock(CommandRepositoryEntry.class);
 		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
 
 		CommandServiceCreateEntry commandServiceCreateEntry = new CommandServiceCreateEntry(queryPortEntry,
@@ -71,23 +71,25 @@ public class CommandServiceCreateEntryTest {
 
 	}
 
+
 	@Test
 	public void validateInsertEntryWithMotorcycleLimitReached() {
 
 		// Arrange
 		String messageVehicleLimitReached = "Ingreso no permitido, no hay mas cupo en el parqueadero.";
 		String fieldVehicleType = "MOTORCYCLE";
-		String fildLicencePlate = "HFR345";
+		String fieldLicencePlate = "HFR345";
+		String engineDisplacement = "100";
 		int limitMotorcycleCount = 10;
 
 		EntryTestDataBuilder entryTestDataBuilder = new EntryTestDataBuilder();
-		entryTestDataBuilder.withLicencePlate(fildLicencePlate).withVehicleType(fieldVehicleType).withEngineDisplacement("100");
+		entryTestDataBuilder.withLicencePlate(fieldLicencePlate).withVehicleType(fieldVehicleType).withEngineDisplacement(engineDisplacement);
 		Entry entry = entryTestDataBuilder.build();
 
-		QueryPortEntry queryPortEntry = Mockito.mock(QueryPortEntry.class);
+		QueryRepositoryEntry queryPortEntry = Mockito.mock(QueryRepositoryEntry.class);
 		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitMotorcycleCount);
 
-		CommandPortEntry commandPortEntry = Mockito.mock(CommandPortEntry.class);
+		CommandRepositoryEntry commandPortEntry = Mockito.mock(CommandRepositoryEntry.class);
 		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
 
 		CommandServiceCreateEntry commandServiceCreateEntry = new CommandServiceCreateEntry(queryPortEntry,
@@ -108,13 +110,11 @@ public class CommandServiceCreateEntryTest {
 		EntryTestDataBuilder entryTestDataBuilder = new EntryTestDataBuilder();
 		entryTestDataBuilder.withLicencePlate("DFR345");
 		Entry entry = entryTestDataBuilder.build();
-		entry.setId(1L);
-		
-	
-		QueryPortEntry queryPortEntry = Mockito.mock(QueryPortEntry.class);
+				
+		QueryRepositoryEntry queryPortEntry = Mockito.mock(QueryRepositoryEntry.class);
 		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitMotorcycleCount);
 
-		CommandPortEntry commandPortEntry = Mockito.mock(CommandPortEntry.class);
+		CommandRepositoryEntry commandPortEntry = Mockito.mock(CommandRepositoryEntry.class);
 		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
 		
 		

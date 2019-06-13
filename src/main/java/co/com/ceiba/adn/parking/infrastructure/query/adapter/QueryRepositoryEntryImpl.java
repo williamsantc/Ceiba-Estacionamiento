@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import co.com.ceiba.adn.parking.domain.model.Entry;
-import co.com.ceiba.adn.parking.domain.model.EntryCore;
-import co.com.ceiba.adn.parking.domain.query.port.QueryPortEntry;
+import co.com.ceiba.adn.parking.domain.model.EntryDto;
+import co.com.ceiba.adn.parking.domain.query.repository.QueryRepositoryEntry;
 import co.com.ceiba.adn.parking.infrastrcuture.mapper.MapperEntryImpl;
-import co.com.ceiba.adn.parking.infrastructure.repository.RepositoryEntry;
+import co.com.ceiba.adn.parking.infrastructure.jparepository.JpaRepositoryEntry;
 
 @Component
-public class QueryAdapterEntry implements QueryPortEntry {
+public class QueryRepositoryEntryImpl implements QueryRepositoryEntry {
 	
-	private final RepositoryEntry repositoryEntry;
+	private final JpaRepositoryEntry repositoryEntry;
 	
 	private final MapperEntryImpl mapperIngresoEntry = MapperEntryImpl.getInstance();
 	
-	public QueryAdapterEntry(RepositoryEntry repositoryEntry) {
+	public QueryRepositoryEntryImpl(JpaRepositoryEntry repositoryEntry) {
 		this.repositoryEntry = repositoryEntry;
 	}
 
 	@Override
-	public List<EntryCore> findAll() {
+	public List<EntryDto> findAll() {
 		return this.mapperIngresoEntry.mapFromEntityList(repositoryEntry.findAll());
 	}
 

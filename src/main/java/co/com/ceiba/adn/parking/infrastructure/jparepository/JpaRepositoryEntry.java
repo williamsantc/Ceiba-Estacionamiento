@@ -1,4 +1,4 @@
-package co.com.ceiba.adn.parking.infrastructure.repository;
+package co.com.ceiba.adn.parking.infrastructure.jparepository;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import co.com.ceiba.adn.parking.infrastructure.entity.EntityEntry;
 
-public interface RepositoryEntry extends CrudRepository<EntityEntry, Long>  {
+public interface JpaRepositoryEntry extends CrudRepository<EntityEntry, Long>  {
 	
 	List<EntityEntry> findAll();
 	
@@ -18,5 +18,5 @@ public interface RepositoryEntry extends CrudRepository<EntityEntry, Long>  {
 	int countByVehicleType(@Param("vehicleType") String vehicleType);
 	
 	@Query("select i from EntityEntry i where i.licencePlate = :licencePlate")
-	EntityEntry findByLicencePlate(@Param("licencePlata") String licencePlate);
+	EntityEntry findByLicencePlate(@Param("licencePlate") String licencePlate);
 }

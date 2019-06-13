@@ -1,4 +1,4 @@
-package co.com.ceiba.adn.parking.application.exception;
+package co.com.ceiba.adn.parking.domain.exception;
 
 public class ExceptionEntryNotAllowed extends RuntimeException {
 

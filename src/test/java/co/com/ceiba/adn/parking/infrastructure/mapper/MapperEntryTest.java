@@ -9,7 +9,7 @@ import org.junit.Test;
 import co.com.ceiba.adn.TestBase;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
 import co.com.ceiba.adn.parking.domain.model.Entry;
-import co.com.ceiba.adn.parking.domain.model.EntryCore;
+import co.com.ceiba.adn.parking.domain.model.EntryDto;
 import co.com.ceiba.adn.parking.infrastrcuture.mapper.MapperEntryImpl;
 import co.com.ceiba.adn.parking.infrastructure.command.testdatabuilder.EntityEntryTestDataBuilder;
 import co.com.ceiba.adn.parking.infrastructure.entity.EntityEntry;
@@ -68,7 +68,7 @@ public class MapperEntryTest {
 		listEntityEntry.add(entityEntry);
 
 		// Act
-		ArrayList<EntryCore> listEntry = new ArrayList<>(mapperEntry.mapFromEntityList(listEntityEntry));
+		ArrayList<EntryDto> listEntry = new ArrayList<>(mapperEntry.mapFromEntityList(listEntityEntry));
 
 		// Assert
 		assertNotNull(listEntry);
