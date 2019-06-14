@@ -1,7 +1,5 @@
 package co.com.ceiba.adn.parking.application.command.testdatabuilder;
 
-import java.util.Calendar;
-
 import co.com.ceiba.adn.parking.application.command.CommandEntry;
 
 public class CommandEntryTestDataBuilder {
@@ -14,7 +12,7 @@ public class CommandEntryTestDataBuilder {
 
 	private String engineDisplacement;
 
-	private Calendar entryTime;
+	private String entryTime;
 
 	public CommandEntryTestDataBuilder() {
 		this.licencePlate = "ERT345";
@@ -42,7 +40,7 @@ public class CommandEntryTestDataBuilder {
 		return this;
 	}
 
-	public CommandEntryTestDataBuilder withEntryTime(Calendar entryTime) {
+	public CommandEntryTestDataBuilder withEntryTime(String entryTime) {
 		this.entryTime = entryTime;
 		return this;
 	}

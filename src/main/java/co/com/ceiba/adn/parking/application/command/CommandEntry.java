@@ -1,7 +1,5 @@
 package co.com.ceiba.adn.parking.application.command;
 
-import java.util.Calendar;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +19,5 @@ public class CommandEntry {
 
 	private String engineDisplacement;
 
-	private Calendar entryTime;
+	private String entryTime;
 }

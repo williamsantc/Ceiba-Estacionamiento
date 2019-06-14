@@ -6,6 +6,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +28,7 @@ import co.com.ceiba.adn.common.application.CommandResponse;
 import co.com.ceiba.adn.common.infrastructure.error.Error;
 import co.com.ceiba.adn.parking.application.command.CommandEntry;
 import co.com.ceiba.adn.parking.application.command.testdatabuilder.CommandEntryTestDataBuilder;
+import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotAllowed;
 import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotFound;
 
 @RunWith(SpringRunner.class)
@@ -57,7 +61,6 @@ public class CommandEntryControllerTest {
 	public void createEntry() throws Exception {
 
 		// Arrange
-
 		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
 		CommandEntry commandEntry = commandEntryTestDataBuilder.build();
 		JSONObject entryJson = new JSONObject(commandEntry);
@@ -69,6 +72,34 @@ public class CommandEntryControllerTest {
 		this.mockMvc.perform(post(API).contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
 				// Assert
 				.andExpect(status().isOk()).andExpect(content().json(responseJson.toString()));
+	}
+
+	@Test
+	public void createEntryWithLicencePlateStartWithA() throws Exception {
+
+		// Arrange
+		String storedLicencePlate = "AR1243";
+		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+		Calendar currentTime = Calendar.getInstance();
+		currentTime.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+		String dateAsString = formatter.format(currentTime.getTime());
+
+		CommandEntry commandEntry = commandEntryTestDataBuilder.withLicencePlate(storedLicencePlate)
+				.withEntryTime(dateAsString).build();
+		JSONObject entryJson = new JSONObject(commandEntry);
+		
+		String exceptionName = ExceptionEntryNotAllowed.class.getSimpleName();
+		String message = "Ingreso no permitido, el tipo de placa indicado solo tiene permitido el ingreso los días domingo y lunes.";
+		Error error = new Error(exceptionName, message);
+
+		JSONObject errorJson = new JSONObject(error);
+
+		// Act
+		this.mockMvc.perform(post(API).contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
+		// Assert
+		.andExpect(status().isForbidden()).andExpect(content().json(errorJson.toString()));
+
 	}
 
 	@Test

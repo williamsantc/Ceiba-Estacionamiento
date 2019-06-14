@@ -1,5 +1,7 @@
 package co.com.ceiba.adn.parking.application.command.factory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.springframework.stereotype.Component;
@@ -18,6 +20,21 @@ public class FactoryEntry {
 
 	public Entry create(CommandEntry commandEntry) {
 		return new Entry(null, commandEntry.getLicencePlate(), commandEntry.getVehicleType(),
-				commandEntry.getEngineDisplacement(), Calendar.getInstance());
+				commandEntry.getEngineDisplacement(), toCalendar(commandEntry.getEntryTime()));
+	}
+
+	private Calendar toCalendar(String stringTime) {
+		if (stringTime != null && !stringTime.isEmpty()) {
+			try {
+				Calendar cal = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+				cal.setTime(sdf.parse(stringTime));
+				return cal;
+			} catch (ParseException e) {
+				return null;
+			}
+
+		}
+		return Calendar.getInstance();
 	}
 }
