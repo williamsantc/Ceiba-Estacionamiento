@@ -1,4 +1,4 @@
-package co.com.ceiba.adn.parking.infrastructure.exception;
+package co.com.ceiba.adn.parking.domain.exception;
 
 public class ExceptionEntryNotFound extends RuntimeException {
 

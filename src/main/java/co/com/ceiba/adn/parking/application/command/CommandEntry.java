@@ -13,6 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommandEntry {
 	
+	private Long id;
+	
 	private String licencePlate;
 
 	private String vehicleType;

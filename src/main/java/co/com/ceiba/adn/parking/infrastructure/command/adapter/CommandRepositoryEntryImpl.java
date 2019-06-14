@@ -23,6 +23,7 @@ public class CommandRepositoryEntryImpl implements CommandRepositoryEntry {
 		return mapperIngresoEntry.mapFromEntity(jpaRepositoryEntry.save(mapperIngresoEntry.mapToEntity(entry)));
 	}
 	
+	@Override
 	public void deleteEntry(Entry entry) {
 		jpaRepositoryEntry.delete(mapperIngresoEntry.mapToEntity(entry));
 	}

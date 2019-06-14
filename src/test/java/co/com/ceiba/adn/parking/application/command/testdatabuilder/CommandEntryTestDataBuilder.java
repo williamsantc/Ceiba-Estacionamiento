@@ -6,6 +6,8 @@ import co.com.ceiba.adn.parking.application.command.CommandEntry;
 
 public class CommandEntryTestDataBuilder {
 
+	private Long id;
+
 	private String licencePlate;
 
 	private String vehicleType;
@@ -18,6 +20,11 @@ public class CommandEntryTestDataBuilder {
 		this.licencePlate = "ERT345";
 		this.vehicleType = "CAR";
 		this.entryTime = Calendar.getInstance();
+	}
+
+	public CommandEntryTestDataBuilder withId(Long id) {
+		this.id = id;
+		return this;
 	}
 
 	public CommandEntryTestDataBuilder withLicencePlate(String licencePlate) {
@@ -41,6 +48,6 @@ public class CommandEntryTestDataBuilder {
 	}
 
 	public CommandEntry build() {
-		return new CommandEntry(this.licencePlate, this.vehicleType, this.engineDisplacement, this.entryTime);
+		return new CommandEntry(this.id, this.licencePlate, this.vehicleType, this.engineDisplacement, this.entryTime);
 	}
 }

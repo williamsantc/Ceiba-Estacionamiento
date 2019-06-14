@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import co.com.ceiba.adn.TestBase;
 import co.com.ceiba.adn.parking.domain.command.repository.CommandRepositoryEntry;
 import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
+import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryExist;
 import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotAllowed;
 import co.com.ceiba.adn.parking.domain.model.Entry;
 import co.com.ceiba.adn.parking.domain.query.repository.QueryRepositoryEntry;
@@ -31,6 +32,7 @@ public class CommandServiceCreateEntryTest {
 
 		QueryRepositoryEntry queryPortEntry = Mockito.mock(QueryRepositoryEntry.class);
 		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitCount);
+		Mockito.when(queryPortEntry.findByLicencePlate(Mockito.anyString())).thenReturn(null);
 
 		CommandRepositoryEntry commandPortEntry = Mockito.mock(CommandRepositoryEntry.class);
 		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
@@ -58,6 +60,7 @@ public class CommandServiceCreateEntryTest {
 
 		QueryRepositoryEntry queryPortEntry = Mockito.mock(QueryRepositoryEntry.class);
 		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitCarCount);
+		Mockito.when(queryPortEntry.findByLicencePlate(Mockito.anyString())).thenReturn(null);
 
 		CommandRepositoryEntry commandPortEntry = Mockito.mock(CommandRepositoryEntry.class);
 		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
@@ -88,6 +91,7 @@ public class CommandServiceCreateEntryTest {
 
 		QueryRepositoryEntry queryPortEntry = Mockito.mock(QueryRepositoryEntry.class);
 		Mockito.when(queryPortEntry.countByVehicleType(Mockito.anyString())).thenReturn(limitMotorcycleCount);
+		Mockito.when(queryPortEntry.findByLicencePlate(Mockito.anyString())).thenReturn(null);
 
 		CommandRepositoryEntry commandPortEntry = Mockito.mock(CommandRepositoryEntry.class);
 		Mockito.when(commandPortEntry.insertEntry(entry)).thenReturn(entry);
@@ -99,6 +103,28 @@ public class CommandServiceCreateEntryTest {
 		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExceptionEntryNotAllowed.class,
 				messageVehicleLimitReached);
 
+	}
+	
+	@Test
+	public void validateInsertEntryWithLicencePlateDuplicated() {
+		
+		// Arrange
+		EntryTestDataBuilder entryTestDataBuilder = new EntryTestDataBuilder();
+		Entry entry = entryTestDataBuilder.build();
+		String messageEntryFound = "Ya se encuentra un vehiculo en el parqueadero con la placa proporcionada.";
+
+		QueryRepositoryEntry queryRepositoryEntry = Mockito.mock(QueryRepositoryEntry.class);
+		Mockito.when(queryRepositoryEntry.findByLicencePlate(Mockito.anyString())).thenReturn(entry);
+
+		CommandRepositoryEntry commandRepositoryEntry = Mockito.mock(CommandRepositoryEntry.class);
+		Mockito.when(commandRepositoryEntry.insertEntry(entry)).thenReturn(entry);
+		
+		CommandServiceCreateEntry commandServiceCreateEntry = new CommandServiceCreateEntry(queryRepositoryEntry,
+				commandRepositoryEntry);
+		
+		// Act - Assert
+		TestBase.assertThrows(() -> commandServiceCreateEntry.exec(entry), ExceptionEntryExist.class,
+				messageEntryFound);
 	}
 
 

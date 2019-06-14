@@ -3,7 +3,7 @@ package co.com.ceiba.adn.parking.domain.command.strategy.approximation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FactoryApproximation {
+public class ContextApproximation {
 
 	private static final String GENERIC_STRATEGY = "GENERIC";
 	
@@ -13,7 +13,7 @@ public class FactoryApproximation {
 		STRATEGIES_APPROXIMATION.put(GENERIC_STRATEGY, new EGenericApproximation());
 	}
 	
-	private FactoryApproximation() {
+	private ContextApproximation() {
 		throw new IllegalStateException("Factory of Approximation Strategies");
 	}
 	

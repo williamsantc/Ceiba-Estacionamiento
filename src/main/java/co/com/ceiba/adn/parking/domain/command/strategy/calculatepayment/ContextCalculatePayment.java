@@ -3,14 +3,14 @@ package co.com.ceiba.adn.parking.domain.command.strategy.calculatepayment;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FactoryCalculatePayment {
+public class ContextCalculatePayment {
 
 	private static final String KEY_MOTORCYCLE = "MOTORCYCLE";
 	private static final String KEY_CAR = "CAR";
 
 	private static final Map<String, IECalculatePayment> CALCULATE_PAYMENT_STRATEGIES = new HashMap<>();
 
-	private FactoryCalculatePayment() {
+	private ContextCalculatePayment() {
 		throw new IllegalStateException("Factory of CalculatePayment Strategies");
 	}
 

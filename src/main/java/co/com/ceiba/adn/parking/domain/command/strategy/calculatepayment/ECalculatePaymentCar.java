@@ -2,7 +2,7 @@ package co.com.ceiba.adn.parking.domain.command.strategy.calculatepayment;
 
 import java.util.Calendar;
 
-import co.com.ceiba.adn.parking.domain.command.strategy.approximation.FactoryApproximation;
+import co.com.ceiba.adn.parking.domain.command.strategy.approximation.ContextApproximation;
 import co.com.ceiba.adn.parking.domain.command.strategy.approximation.IEApproximation;
 import co.com.ceiba.adn.parking.domain.model.Entry;
 
@@ -28,12 +28,12 @@ public class ECalculatePaymentCar implements IECalculatePayment {
 
 		hoursInParking -= daysInParking * DAY_AS_HOURS;
 
-		if (daysInParking >= MAX_HOURS_OF_DAY) {
+		if (hoursInParking >= MAX_HOURS_OF_DAY) {
 			daysInParking++;
 			hoursInParking = 0;
 		}
 
-		IEApproximation approximationStrategy = FactoryApproximation.getStrategy(APPROXIMATION_STRATEGY);
+		IEApproximation approximationStrategy = ContextApproximation.getStrategy(APPROXIMATION_STRATEGY);
 		int approximatedHours = approximationStrategy.approximate(hoursInParking);
 
 		return (DAY_PRICE_CAR * daysInParking) + (HOUR_PRICE_CAR * approximatedHours);
