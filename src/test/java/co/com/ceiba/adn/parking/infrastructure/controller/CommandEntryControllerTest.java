@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +20,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
 import co.com.ceiba.adn.ApplicationMock;
 import co.com.ceiba.adn.ParkingApplication;
+import co.com.ceiba.adn.common.application.CommandResponse;
+import co.com.ceiba.adn.common.infrastructure.error.Error;
 import co.com.ceiba.adn.parking.application.command.CommandEntry;
 import co.com.ceiba.adn.parking.application.command.testdatabuilder.CommandEntryTestDataBuilder;
+import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotFound;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ApplicationMock.class)
@@ -47,28 +47,9 @@ public class CommandEntryControllerTest {
 	public void checkList() throws Exception {
 
 		// Act
-		this.mockMvc.perform(get("/entry")).andDo(print()).andExpect(status().isAccepted())
+		this.mockMvc.perform(get("/entry")).andExpect(status().isAccepted())
 				// Assert
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
-	}
-	@Test
-	public void dispatchEntry() throws Exception {
-
-		// Arrange
-
-		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
-		CommandEntry commandEntry = commandEntryTestDataBuilder.withId(1L).build();
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-
-		String entryJson = ow.writeValueAsString(commandEntry);
-
-		// Act
-		this.mockMvc.perform(post("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson));
-		this.mockMvc.perform(put("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson))
-				// Assert
-				.andExpect(status().isOk()).andExpect(content().string("{\"value\":1000.0}"));
 	}
 
 	@Test
@@ -78,18 +59,56 @@ public class CommandEntryControllerTest {
 
 		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
 		CommandEntry commandEntry = commandEntryTestDataBuilder.build();
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-
-		String entryJson = ow.writeValueAsString(commandEntry);
+		JSONObject entryJson = new JSONObject(commandEntry);
+		
+		CommandResponse<Long> response = new CommandResponse<>(1L);
+		JSONObject responseJson = new JSONObject(response);
 
 		// Act
-		this.mockMvc.perform(post("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson))
+		this.mockMvc.perform(post("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
 				.andDo(print())
 				// Assert
-				.andExpect(status().isOk()).andExpect(content().string("{\"value\":2}"));
+				.andExpect(status().isOk()).andExpect(content().json(responseJson.toString()));
 	}
 
-	
+	@Test
+	public void dispatchEntry() throws Exception {
+
+		// Arrange
+		String storedLicencePlate = "ER1243";
+		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
+		
+		CommandEntry commandEntry = commandEntryTestDataBuilder.withLicencePlate(storedLicencePlate).build();
+		JSONObject entryJson = new JSONObject(commandEntry);
+		
+		CommandResponse<Double> response = new CommandResponse<>(1320000D);
+		JSONObject responseJson = new JSONObject(response);
+		
+		// Act
+		this.mockMvc.perform(put("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
+				// Assert
+				.andExpect(status().isOk()).andExpect(content().json(responseJson.toString()));
+	}
+
+	@Test
+	public void dispatchEntryFail() throws Exception {
+
+		// Arrange
+		String storedLicencePlate = "ER1243";
+		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
+		CommandEntry commandEntry = commandEntryTestDataBuilder.withLicencePlate(storedLicencePlate).build();
+
+		String exceptionName = ExceptionEntryNotFound.class.getSimpleName();
+		String message = "No se encontró ningún vehiculo en el parqueadero con la placa proporcionada";
+		Error error = new Error(exceptionName, message);
+
+		JSONObject errorJson = new JSONObject(error);
+		JSONObject entryJson = new JSONObject(commandEntry);
+		
+		// Act
+		this.mockMvc.perform(put("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
+				// Assert
+				.andExpect(status().isNotFound()).andExpect(content().json(errorJson.toString()));
+	}
+
 }

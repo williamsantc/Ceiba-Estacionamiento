@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 
 import co.com.ceiba.adn.parking.domain.command.repository.CommandRepositoryEntry;
 import co.com.ceiba.adn.parking.domain.model.Entry;
-import co.com.ceiba.adn.parking.infrastrcuture.mapper.MapperEntryImpl;
 import co.com.ceiba.adn.parking.infrastructure.jparepository.JpaRepositoryEntry;
+import co.com.ceiba.adn.parking.infrastructure.mapper.MapperEntryImpl;
 
 @Component
 public class CommandRepositoryEntryImpl implements CommandRepositoryEntry {

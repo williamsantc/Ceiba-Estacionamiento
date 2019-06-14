@@ -19,7 +19,7 @@ public class CommandEntryTestDataBuilder {
 	public CommandEntryTestDataBuilder() {
 		this.licencePlate = "ERT345";
 		this.vehicleType = "CAR";
-		this.entryTime = Calendar.getInstance();
+		this.entryTime = null;
 	}
 
 	public CommandEntryTestDataBuilder withId(Long id) {

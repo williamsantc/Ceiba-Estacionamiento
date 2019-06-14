@@ -1,4 +1,4 @@
-package co.com.ceiba.adn.parking.infrastrcuture.mapper;
+package co.com.ceiba.adn.parking.infrastructure.mapper;
 
 import java.util.List;
 
