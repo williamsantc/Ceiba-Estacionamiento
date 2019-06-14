@@ -11,7 +11,6 @@ import co.com.ceiba.adn.parking.domain.model.Entry;
 import co.com.ceiba.adn.parking.domain.model.EntryDto;
 import co.com.ceiba.adn.parking.infrastructure.command.testdatabuilder.EntityEntryTestDataBuilder;
 import co.com.ceiba.adn.parking.infrastructure.entity.EntityEntry;
-import co.com.ceiba.adn.parking.infrastructure.mapper.MapperEntryImpl;
 
 public class MapperEntryTest {
 

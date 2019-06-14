@@ -35,6 +35,8 @@ public class CommandEntryControllerTest {
 
 	private MockMvc mockMvc;
 
+	private static final String API = "/entry";
+
 	@Autowired
 	private WebApplicationContext wac;
 
@@ -47,7 +49,7 @@ public class CommandEntryControllerTest {
 	public void checkList() throws Exception {
 
 		// Act
-		this.mockMvc.perform(get("/entry")).andExpect(status().isAccepted())
+		this.mockMvc.perform(get(API)).andExpect(status().isAccepted())
 				// Assert
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 	}
@@ -60,12 +62,12 @@ public class CommandEntryControllerTest {
 		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
 		CommandEntry commandEntry = commandEntryTestDataBuilder.build();
 		JSONObject entryJson = new JSONObject(commandEntry);
-		
+
 		CommandResponse<Long> response = new CommandResponse<>(1L);
 		JSONObject responseJson = new JSONObject(response);
 
 		// Act
-		this.mockMvc.perform(post("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
+		this.mockMvc.perform(post(API).contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
 				.andDo(print())
 				// Assert
 				.andExpect(status().isOk()).andExpect(content().json(responseJson.toString()));
@@ -77,15 +79,15 @@ public class CommandEntryControllerTest {
 		// Arrange
 		String storedLicencePlate = "ER1243";
 		CommandEntryTestDataBuilder commandEntryTestDataBuilder = new CommandEntryTestDataBuilder();
-		
+
 		CommandEntry commandEntry = commandEntryTestDataBuilder.withLicencePlate(storedLicencePlate).build();
 		JSONObject entryJson = new JSONObject(commandEntry);
-		
+
 		CommandResponse<Double> response = new CommandResponse<>(1320000D);
 		JSONObject responseJson = new JSONObject(response);
-		
+
 		// Act
-		this.mockMvc.perform(put("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
+		this.mockMvc.perform(put(API).contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
 				// Assert
 				.andExpect(status().isOk()).andExpect(content().json(responseJson.toString()));
 	}
@@ -104,9 +106,9 @@ public class CommandEntryControllerTest {
 
 		JSONObject errorJson = new JSONObject(error);
 		JSONObject entryJson = new JSONObject(commandEntry);
-		
+
 		// Act
-		this.mockMvc.perform(put("/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
+		this.mockMvc.perform(put(API).contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
 				// Assert
 				.andExpect(status().isNotFound()).andExpect(content().json(errorJson.toString()));
 	}
