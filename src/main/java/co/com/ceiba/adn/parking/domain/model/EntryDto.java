@@ -23,27 +23,12 @@ public class EntryDto {
 		return licencePlate;
 	}
 
-	public void setLicencePlate(String licencePlate) {
-		this.licencePlate = licencePlate;
-	}
-
 	public String getVehicleType() {
 		return vehicleType;
-	}
-
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
 	}
 
 	public String getEntryTime() {
 		return entryTime;
 	}
 
-	public void setEntryTime(String entryTime) {
-		this.entryTime = entryTime;
-	}
-	
-	
-	
-	
 }
