@@ -3,7 +3,6 @@ package co.com.ceiba.adn.parking.infrastructure.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -68,7 +67,6 @@ public class CommandEntryControllerTest {
 
 		// Act
 		this.mockMvc.perform(post(API).contentType(MediaType.APPLICATION_JSON_UTF8).content(entryJson.toString()))
-				.andDo(print())
 				// Assert
 				.andExpect(status().isOk()).andExpect(content().json(responseJson.toString()));
 	}
