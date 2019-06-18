@@ -28,6 +28,8 @@ import co.com.ceiba.adn.common.application.CommandResponse;
 import co.com.ceiba.adn.common.infrastructure.error.Error;
 import co.com.ceiba.adn.parking.application.command.CommandEntry;
 import co.com.ceiba.adn.parking.application.command.testdatabuilder.CommandEntryTestDataBuilder;
+import co.com.ceiba.adn.parking.domain.command.strategy.calculatepayment.ECalculatePaymentCar;
+import co.com.ceiba.adn.parking.domain.command.testdatabuilder.EntryTestDataBuilder;
 import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotAllowed;
 import co.com.ceiba.adn.parking.domain.exception.ExceptionEntryNotFound;
 
@@ -111,8 +113,21 @@ public class CommandEntryControllerTest {
 
 		CommandEntry commandEntry = commandEntryTestDataBuilder.withLicencePlate(storedLicencePlate).build();
 		JSONObject entryJson = new JSONObject(commandEntry);
+		
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		cal.setTime(sdf.parse("01/01/2019"));
+		
+		EntryTestDataBuilder entryTestDataBuilder = new EntryTestDataBuilder();
+		entryTestDataBuilder.withLicencePlate(storedLicencePlate).withEntryTime(cal);
+		
+		ECalculatePaymentCar e =  new ECalculatePaymentCar();
+		
+		Double ammount = e.calculatePayment(entryTestDataBuilder.build());
 
-		CommandResponse<Double> response = new CommandResponse<>(1320000D);
+		CommandResponse<Double> response = new CommandResponse<>(ammount);
 		JSONObject responseJson = new JSONObject(response);
 
 		// Act
